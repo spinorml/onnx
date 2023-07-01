@@ -15,6 +15,9 @@
  * limitations under the License.
  */
 
-pub mod protos {
-    include!(concat!(env!("OUT_DIR"), "/protos/mod.rs"));
+use onnxrust::protos;
+
+#[test]
+fn test_read_single_relu() {
+    let path = "../onnx/examples/resources/single_relu/onnx";
 }

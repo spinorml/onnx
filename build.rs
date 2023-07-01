@@ -15,6 +15,19 @@
  * limitations under the License.
  */
 
-pub mod protos {
-    include!(concat!(env!("OUT_DIR"), "/protos/mod.rs"));
+use protobuf_codegen;
+use protoc_bin_vendored;
+
+fn main() {
+    protobuf_codegen::Codegen::new()
+        // Use `protoc-bin-vendored` bundled protoc command, optional.
+        .protoc_path(&protoc_bin_vendored::protoc_bin_path().unwrap())
+        // All inputs and imports from the inputs must reside in `includes` directories.
+        .includes(["onnx/onnx"])
+        // Inputs must reside in some of include paths.
+        .input("onnx/onnx/onnx.proto3")
+        // Specify output directory relative to Cargo output directory.
+        .cargo_out_dir("protos")
+        .capture_stderr()
+        .run_from_script();
 }
