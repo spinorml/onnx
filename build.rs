@@ -15,9 +15,6 @@
  * limitations under the License.
  */
 
-use protobuf_codegen;
-use protoc_bin_vendored;
-
 fn main() {
     protobuf_codegen::Codegen::new()
         // Use `protoc-bin-vendored` bundled protoc command, optional.

@@ -15,9 +15,19 @@
  * limitations under the License.
  */
 
-use onnxrust::protos;
+use std::{fs::File, path::PathBuf};
+
+use onnxrust::onnx_proto3::ModelProto;
+use protobuf::{CodedInputStream, Message};
 
 #[test]
 fn test_read_single_relu() {
-    let path = "../onnx/examples/resources/single_relu/onnx";
+    let mut resource_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    resource_path.push("onnx/onnx/examples/resources/single_relu.onnx");
+
+    let mut file = File::open(resource_path).unwrap();
+    let mut stream = CodedInputStream::new(&mut file);
+    let model = ModelProto::parse_from(&mut stream).unwrap();
+
+    assert_eq!("backend-test", model.producer_name);
 }

@@ -15,6 +15,4 @@
  * limitations under the License.
  */
 
-pub mod protos {
-    include!(concat!(env!("OUT_DIR"), "/protos/mod.rs"));
-}
+include!(concat!(env!("OUT_DIR"), "/protos/mod.rs"));
