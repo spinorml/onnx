@@ -17,7 +17,7 @@
 
 use std::{fs::File, path::PathBuf};
 
-use onnxrust::onnx_proto3::ModelProto;
+use onnx::onnx_proto3::ModelProto;
 use protobuf::{CodedInputStream, Message};
 
 #[test]
